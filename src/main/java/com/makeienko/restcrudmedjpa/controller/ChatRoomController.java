@@ -33,7 +33,7 @@ public class ChatRoomController {
         return "Success";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/channels/{id}")
     public String deleteChannel(@PathVariable Long id) {
         chatRoomService.deleteChannelById(id);
         return "Success";
