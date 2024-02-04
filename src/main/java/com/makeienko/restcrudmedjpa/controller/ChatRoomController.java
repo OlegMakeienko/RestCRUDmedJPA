@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/channels")
+@RequestMapping("/api/channels/")
 public class ChatRoomController {
 
     @Autowired
@@ -16,7 +16,7 @@ public class ChatRoomController {
 //    @Autowired
 //    private MessageService messageService;
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "{id}")
     public ChatRoom getChannel(@PathVariable("id") Long id) {
         return this.chatRoomService.getChannelById(id);
     }
@@ -32,7 +32,7 @@ public class ChatRoomController {
 //        return "channel-list";
 //    }
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String getLandingPage() {
         return "index";
     }
@@ -43,13 +43,13 @@ public class ChatRoomController {
         return "Success";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public String deleteChannel(@PathVariable ("id") Long id) {
         chatRoomService.deleteChannelById(id);
         return "Success";
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public String updateChannelTitle(@PathVariable Long id, @RequestBody ChatRoom updatedChannel) {
         chatRoomService.updateChannelTitle(id, updatedChannel.getTitle());
         return "Success";
