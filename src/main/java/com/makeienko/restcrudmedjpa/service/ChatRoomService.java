@@ -22,7 +22,7 @@ public class ChatRoomService {
     }
 
     public ChatRoom getChannelById(Long id) {
-        return chatRoomRepo.getOne(id);
+        return chatRoomRepo.findChatById(id);
     }
 
     public ChatRoom createChannel(ChatRoom channel) {

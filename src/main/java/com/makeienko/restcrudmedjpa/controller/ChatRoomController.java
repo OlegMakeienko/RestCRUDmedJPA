@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/channels")
 public class ChatRoomController {
 
     @Autowired
@@ -16,30 +16,40 @@ public class ChatRoomController {
 //    @Autowired
 //    private MessageService messageService;
 
-    @GetMapping("/")
-    @ResponseBody
-    public String test() {
-        return "test";
+    @GetMapping(value = "/{id}")
+    public ChatRoom getChannel(@PathVariable("id") Long id) {
+        return this.chatRoomService.getChannelById(id);
     }
 
-    @GetMapping("/channels")
+    @GetMapping("")
     public List<ChatRoom> getAllChannels() {
         return chatRoomService.getAllChannels();
     }
 
-    @PostMapping("/channels")
+//    @GetMapping("/channel-list")
+//    public String showAllChannels() {
+//        List<ChatRoom> channels = chatRoomService.getAllChannels();
+//        return "channel-list";
+//    }
+
+    @GetMapping("/")
+    public String getLandingPage() {
+        return "index";
+    }
+
+    @PostMapping("")
     public String createChannel(@RequestBody ChatRoom channel) {
         chatRoomService.createChannel(channel);
         return "Success";
     }
 
-    @DeleteMapping("/channels/{id}")
-    public String deleteChannel(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public String deleteChannel(@PathVariable ("id") Long id) {
         chatRoomService.deleteChannelById(id);
         return "Success";
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public String updateChannelTitle(@PathVariable Long id, @RequestBody ChatRoom updatedChannel) {
         chatRoomService.updateChannelTitle(id, updatedChannel.getTitle());
         return "Success";
