@@ -17,7 +17,7 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public List<Message> getAllMessages() {
+    public List<Message> getAllMessages(Long id) {
         return messageRepository.findAll();
     }
 
@@ -32,5 +32,9 @@ public class MessageService {
 
     public void deleteMessageById(Long id) {
         messageRepository.deleteById(id);
+    }
+
+    public List<Message> findAllMessagesInChatRoom(String title) {
+        return messageRepository.findAllMessagesInChatRoom(title);
     }
 }
