@@ -25,20 +25,21 @@ public class ChatRoomService {
         return chatRoomRepo.findChatById(id);
     }
 
-    public ChatRoom createChannel(ChatRoom channel) {
-        return chatRoomRepo.save(channel);
+    public void createChannel(ChatRoom channel) {
+        chatRoomRepo.save(channel);
     }
 
-    public void deleteChannelById(Long id) {
+    public boolean deleteChannelById(Long id) {
         chatRoomRepo.deleteById(id);
+        return false;
     }
 
-    public ChatRoom updateChannelTitle(Long id, String newTitle) {
+    public void updateChannelTitle(Long id, String newTitle) {
         Optional<ChatRoom> optionalChannel = chatRoomRepo.findById(id);
         if (optionalChannel.isPresent()) {
             ChatRoom channel = optionalChannel.get();
             channel.setTitle(newTitle);
-            return chatRoomRepo.save(channel);
+            chatRoomRepo.save(channel);
         } else {
            throw new RuntimeException();
         }
