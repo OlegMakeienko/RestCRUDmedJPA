@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/channels/")
+//@RestController
+//@RequestMapping("/api/channels/")
 public class ChatRoomController {
 
-    @Autowired
+//    @Autowired
     private ChatRoomService chatRoomService;
 //
 //    @Autowired
