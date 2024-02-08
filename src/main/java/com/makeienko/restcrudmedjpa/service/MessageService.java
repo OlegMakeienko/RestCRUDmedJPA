@@ -36,8 +36,4 @@ public class MessageService {
     public void deleteMessageById(Long id) {
         messageRepository.deleteById(id);
     }
-
-    public List<Message> findAllMessagesInChatRoom(String title) {
-        return messageRepository.findAllMessagesInChatRoom(title);
-    }
 }
