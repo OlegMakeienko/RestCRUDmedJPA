@@ -17,17 +17,8 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public List<Message> getAllMessages(Long id) {
-        return messageRepository.findAll();
-    }
-
     public List<Message> getAllMessagesInChannel(Long id) {
         return messageRepository.findByChannelId(id);
-    }
-
-    public Message getMessageById(Long id) {
-        return messageRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Message not found with id: " + id));
     }
 
     public void saveMessage(Message message) {

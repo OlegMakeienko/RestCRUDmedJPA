@@ -2,7 +2,6 @@ package com.makeienko.restcrudmedjpa.controller;
 
 import com.makeienko.restcrudmedjpa.model.ChatRoom;
 import com.makeienko.restcrudmedjpa.service.ChatRoomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/channels/")
 public class ChatRoomController {
 
-    @Autowired
-    private ChatRoomService chatRoomService;
+    private final ChatRoomService chatRoomService;
+
+    public ChatRoomController(ChatRoomService chatRoomService) {
+        this.chatRoomService = chatRoomService;
+    }
 
     @GetMapping(value = "{id}")
     public ResponseEntity<ChatRoom> getChannel(@PathVariable("id") Long id) {

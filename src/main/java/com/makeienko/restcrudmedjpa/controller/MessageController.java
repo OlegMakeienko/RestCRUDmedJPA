@@ -4,7 +4,6 @@ import com.makeienko.restcrudmedjpa.model.ChatRoom;
 import com.makeienko.restcrudmedjpa.model.Message;
 import com.makeienko.restcrudmedjpa.service.ChatRoomService;
 import com.makeienko.restcrudmedjpa.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +14,14 @@ import java.util.List;
 @RequestMapping("/api/channels/")
 public class MessageController {
 
-    @Autowired
-    private ChatRoomService chatRoomService;
+    private final ChatRoomService chatRoomService;
 
-    @Autowired
-    private MessageService messageService;
+    private final MessageService messageService;
+
+    public MessageController(ChatRoomService chatRoomService, MessageService messageService) {
+        this.chatRoomService = chatRoomService;
+        this.messageService = messageService;
+    }
 
     @PutMapping("{id}/messages")
     public ResponseEntity<String> createMessageInChannel(@PathVariable Long id, @RequestBody Message message) {
@@ -47,7 +49,11 @@ public class MessageController {
 
     @DeleteMapping("/{id}/messages/{messageId}")
     public ResponseEntity<String> deleteMessage(@PathVariable Long messageId) {
-        messageService.deleteMessage(messageId);
-        return ResponseEntity.status(200).body("Message " + messageId + " deleted successfully");
+        boolean deleted = messageService.deleteMessage(messageId);
+        if (deleted) {
+            return ResponseEntity.status(200).body("Message " + messageId + " deleted successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

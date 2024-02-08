@@ -41,7 +41,7 @@ public class ChatRoomService {
             channel.setTitle(newTitle);
             chatRoomRepo.save(channel);
         } else {
-           throw new RuntimeException();
+            throw new RuntimeException();
         }
     }
 }
