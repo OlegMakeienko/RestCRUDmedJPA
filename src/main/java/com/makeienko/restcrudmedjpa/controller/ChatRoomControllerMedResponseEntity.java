@@ -1,9 +1,7 @@
 package com.makeienko.restcrudmedjpa.controller;
 
 import com.makeienko.restcrudmedjpa.model.ChatRoom;
-import com.makeienko.restcrudmedjpa.model.Message;
 import com.makeienko.restcrudmedjpa.service.ChatRoomService;
-import com.makeienko.restcrudmedjpa.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +15,6 @@ public class ChatRoomControllerMedResponseEntity {
 
     @Autowired
     private ChatRoomService chatRoomService;
-
-    @Autowired
-    private MessageService messageService;
 
     @GetMapping(value = "{id}")
     public ResponseEntity<ChatRoom> getChannel(@PathVariable("id") Long id) {
@@ -57,20 +52,6 @@ public class ChatRoomControllerMedResponseEntity {
     public ResponseEntity<String> updateChannelTitle(@PathVariable Long id, @RequestBody ChatRoom updatedChannel) {
         chatRoomService.updateChannelTitle(id, updatedChannel.getTitle());
         return ResponseEntity.ok("Channel title updated successfully");
-    }
-
-    @PutMapping("{id}/messages")
-    public ResponseEntity<String> createMessageInChannel(@PathVariable Long id, @RequestBody Message message) {
-        ChatRoom chatRoom = chatRoomService.getChannelById(id);
-        message.setChatRoom(chatRoom);
-        messageService.saveMessage(message);
-        return ResponseEntity.status(200).body("Message created successfully");
-    }
-
-    @GetMapping("{id}/messages")
-    public ResponseEntity<List<Message>> getAllMessagesInChannel(@PathVariable Long id) {
-        List<Message> messages = messageService.getAllMessagesInChannel(id);
-        return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 }
 
