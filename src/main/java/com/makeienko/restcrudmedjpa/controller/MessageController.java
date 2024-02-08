@@ -44,10 +44,10 @@ public class MessageController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-//
-//    @DeleteMapping("/{id}/messages/{messageId}")
-//    public ResponseEntity<Void> deleteMessage(@PathVariable Long id, @PathVariable Long messageId) {
-//        messageService.deleteMessageById(id, messageId);
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+
+    @DeleteMapping("/{id}/messages/{messageId}")
+    public ResponseEntity<String> deleteMessage(@PathVariable Long messageId) {
+        messageService.deleteMessage(messageId);
+        return ResponseEntity.status(200).body("Message " + messageId + " deleted successfully");
+    }
 }
