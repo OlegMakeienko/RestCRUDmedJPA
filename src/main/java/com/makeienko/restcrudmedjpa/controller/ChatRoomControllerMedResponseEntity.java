@@ -67,7 +67,7 @@ public class ChatRoomControllerMedResponseEntity {
     @PutMapping("{id}/messages")
     public ResponseEntity<String> createMessageInChannel(@PathVariable Long id, @RequestBody Message message) {
         messageService.saveMessage(message);
-        return ResponseEntity.ok("Message created successfully");
+        return ResponseEntity.status(200).body("Message created successfully");
     }
 
     @GetMapping("{id}/messages")
