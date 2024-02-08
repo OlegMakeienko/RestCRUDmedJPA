@@ -11,4 +11,7 @@ public interface MessageRepo extends JpaRepository<Message, Long> {
     @Query("SELECT m FROM Message m WHERE m.chatRoom.title = :title")
     List<Message> findAllMessagesInChatRoom(@Param("title") String title);
 
+    @Query("SELECT m FROM Message m WHERE m.chatRoom.id = :id")
+    List<Message> findByChannelId(Long id);
+
 }

@@ -37,11 +37,6 @@ public class ChatRoomControllerMedResponseEntity {
         return ResponseEntity.ok(channels);
     }
 
-    @GetMapping("/index")
-    public String getLandingPage() {
-        return "index";
-    }
-
     @PostMapping("")
     public ResponseEntity<String> createChannel(@RequestBody ChatRoom channel) {
         chatRoomService.createChannel(channel);
@@ -72,7 +67,7 @@ public class ChatRoomControllerMedResponseEntity {
 
     @GetMapping("{id}/messages")
     public ResponseEntity<List<Message>> getAllMessagesInChannel(@PathVariable Long id) {
-        List<Message> messages = messageService.getAllMessages(id);
+        List<Message> messages = messageService.getAllMessagesInChannel(id);
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 //    @GetMapping("{title}/messages")

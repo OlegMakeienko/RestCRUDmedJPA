@@ -21,6 +21,9 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
+    public List<Message> getAllMessagesInChannel(Long id) {
+        return messageRepository.findByChannelId(id);
+    }
     public Message getMessageById(Long id) {
         return messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found with id: " + id));
