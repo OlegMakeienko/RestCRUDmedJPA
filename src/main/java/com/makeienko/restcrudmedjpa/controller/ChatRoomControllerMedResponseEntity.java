@@ -61,6 +61,8 @@ public class ChatRoomControllerMedResponseEntity {
 
     @PutMapping("{id}/messages")
     public ResponseEntity<String> createMessageInChannel(@PathVariable Long id, @RequestBody Message message) {
+        ChatRoom chatRoom = chatRoomService.getChannelById(id);
+        message.setChatRoom(chatRoom);
         messageService.saveMessage(message);
         return ResponseEntity.status(200).body("Message created successfully");
     }
@@ -70,9 +72,5 @@ public class ChatRoomControllerMedResponseEntity {
         List<Message> messages = messageService.getAllMessagesInChannel(id);
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
-//    @GetMapping("{title}/messages")
-//    public List<Message> getAllMessagesInChatRoom(@PathVariable String title) {
-//        return messageService.findAllMessagesInChatRoom(title);
-//    }
 }
 
