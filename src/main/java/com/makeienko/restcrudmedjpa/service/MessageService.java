@@ -24,6 +24,7 @@ public class MessageService {
     public List<Message> getAllMessagesInChannel(Long id) {
         return messageRepository.findByChannelId(id);
     }
+
     public Message getMessageById(Long id) {
         return messageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Message not found with id: " + id));
@@ -33,7 +34,17 @@ public class MessageService {
         messageRepository.save(message);
     }
 
-    public void deleteMessageById(Long id) {
-        messageRepository.deleteById(id);
+//    public void deleteMessageById(Long id, Long messageId) {
+//        messageRepository.deleteById(id, messageId);
+//    }
+
+    public Message updateMessageContent(Long id, Long messageId, Message updatedMessage) {
+        Message existingMessage = messageRepository.findByIdAndChannelId(messageId, id);
+        if (existingMessage == null) {
+            throw new RuntimeException("Message not found with id " + messageId + " and channelId " + id);
+        } else {
+            existingMessage.setContent(updatedMessage.getContent());
+            return messageRepository.save(existingMessage);
+        }
     }
 }
