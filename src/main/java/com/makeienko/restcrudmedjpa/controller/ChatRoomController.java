@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/channels/")
-public class ChatRoomControllerMedResponseEntity {
+public class ChatRoomController {
 
     @Autowired
     private ChatRoomService chatRoomService;
