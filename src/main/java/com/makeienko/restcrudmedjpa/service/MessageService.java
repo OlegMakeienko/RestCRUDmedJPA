@@ -34,9 +34,10 @@ public class MessageService {
         messageRepository.save(message);
     }
 
-//    public void deleteMessageById(Long id, Long messageId) {
-//        messageRepository.deleteById(id, messageId);
-//    }
+    public boolean deleteMessage(Long messageId) {
+        messageRepository.deleteById(messageId);
+        return false;
+    }
 
     public Message updateMessageContent(Long id, Long messageId, Message updatedMessage) {
         Message existingMessage = messageRepository.findByIdAndChannelId(messageId, id);
